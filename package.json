@@ -1,6 +1,6 @@
 {
   "name": "project-cadre",
-  "private": true,
+  "private": false,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -14,5 +14,9 @@
   },
   "dependencies": {
     "konva": "^9.3.18"
+  },
+  "engines": {
+    "node": ">=20.x",
+    "npm": ">=10.x"
   }
 }
