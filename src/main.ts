@@ -30,49 +30,47 @@ class main {
                 cornerRadius: 25,
             });
             roleArt.x(300/2 - roleArt.width()/2);
-            playerRoleCard.add(roleArt);
+
+            let bg: Konva.Rect = new Konva.Rect({
+                x: 0,
+                y: 0,
+                width: 300,
+                height: 300,
+                fill: 'orange',
+                stroke: 'black',
+                strokeWidth: 2,
+                cornerRadius: 20,
+            });
+
+            let roleName: Konva.Text = new Konva.Text({
+                y: 10,
+                text: 'Quartermaster',
+                fontSize: 30,
+                fontFamily: 'Calibri',
+                fill: 'black',
+            });
+            roleName.x(300/2 - roleName.width() / 2);
+
+            let roleAbility: Konva.Text = new Konva.Text({
+                x: 10,
+                y: 165,
+                width: 300,
+                text: 'During Disencamp Phase, learn how many Cadres have more than 1 member not on your team',
+                fontSize: 14,
+                fontFamily: 'Calibri',
+                fill: 'black',
+            });
+
+            let roleCadre: Konva.Text = new Konva.Text({
+                y: 215,
+                text: 'Cadre Marker',
+                fontSize: 14,
+                fontFamily: 'Calibri',
+                fill: 'black',
+            });
+            roleCadre.x(300/2 - roleCadre.width() / 2);
+            playerRoleCard.add(bg, roleArt, roleName, roleAbility, roleCadre);
         })
-
-        let bg: Konva.Rect = new Konva.Rect({
-            x: 0,
-            y: 0,
-            width: 300,
-            height: 300,
-            fill: 'orange',
-            stroke: 'black',
-            strokeWidth: 2,
-            cornerRadius: 20,
-        });
-
-        let roleName: Konva.Text = new Konva.Text({
-            y: 10,
-            text: 'Quartermaster',
-            fontSize: 30,
-            fontFamily: 'Calibri',
-            fill: 'black',
-        });
-        roleName.x(300/2 - roleName.width() / 2);
-
-        let roleAbility: Konva.Text = new Konva.Text({
-            x: 10,
-            y: 165,
-            width: 300,
-            text: 'During Disencamp Phase, learn how many Cadres have more than 1 member not on your team',
-            fontSize: 14,
-            fontFamily: 'Calibri',
-            fill: 'black',
-        });
-
-        let roleCadre: Konva.Text = new Konva.Text({
-            y: 215,
-            text: 'Cadre Marker',
-            fontSize: 14,
-            fontFamily: 'Calibri',
-            fill: 'black',
-        });
-        roleCadre.x(300/2 - roleCadre.width() / 2);
-
-        playerRoleCard.add(bg, roleName, roleAbility, roleCadre);
 
         let redCircle: Konva.Circle = new Konva.Circle({
             x: this._stage.width() / 2 - 100,
