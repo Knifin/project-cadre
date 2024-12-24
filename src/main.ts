@@ -22,7 +22,7 @@ class main {
             draggable: true,
         });
 
-        Konva.Image.fromURL('https://i.redd.it/mr2uic5g16a81.jpg', (roleArt: Konva.Image): void => {
+        Konva.Image.fromURL('./quartermaster.jpg', (roleArt: Konva.Image): void => {
             roleArt.setAttrs({
                 y: 50,
                 height: 100,
