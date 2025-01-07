@@ -171,7 +171,7 @@ class main {
 
     public displayCadreMarkersBox(): void {
         let cadreMarkersBox: Konva.Group = new Konva.Group({
-            x: 400,
+            x: 350,
             y: window.innerHeight - 200,
             width: 300,
         });
@@ -199,9 +199,9 @@ class main {
         this._assets.add(cadreMarkersBox);
 
         for (let i = 0; i < 255; i++) {
-            this.addCadreMarker('red', 475);
-            this.addCadreMarker('yellow', 550);
-            this.addCadreMarker('green', 625);
+            this.addCadreMarker('red', 425);
+            this.addCadreMarker('yellow', 500);
+            this.addCadreMarker('green', 575);
         }
     }
 
@@ -217,9 +217,65 @@ class main {
         });
         this._assets.add(circle);
     }
+
+    public displayCursedBox(): void {
+        let cursedBox: Konva.Group = new Konva.Group({
+            x: 675,
+            y: window.innerHeight - 200,
+            width: 300,
+        });
+
+        let bg: Konva.Rect = new Konva.Rect({
+            x: 10,
+            y: 10,
+            width: 300,
+            height: 150,
+            fill: 'white',
+            stroke: 'black',
+            strokeWidth: 2,
+            cornerRadius: 20,
+        });
+
+        let title: Konva.Text = new Konva.Text({
+            y: 25,
+            text: 'Cursed Box',
+            fontSize: 30,
+            fontFamily: 'Calibri',
+            fill: 'black',
+        });
+        title.x(300/2 - title.width() / 2);
+        cursedBox.add(bg, title);
+        this._assets.add(cursedBox);
+
+        for (let i = 0; i < 25; i++) {
+            this.addCursedItem('./assets/roles/lost.svg', 750);
+            this.addCursedItem('./assets/roles/shadowed.svg', 850);
+        }
+    }
+
+    public addCursedItem(type: string, posX: number): void {
+        const cursedBoxItem: Konva.Group = new Konva.Group({
+            x: posX,
+            y: window.innerHeight - 125,
+            draggable: true,
+        });
+
+        Konva.Image.fromURL(type, (roleArt: Konva.Image): void => {
+            roleArt.setAttrs({
+                x: 0,
+                y: 0,
+                height: 50,
+                width: 50,
+            });
+            cursedBoxItem.add(roleArt);
+        });
+
+        this._assets.add(cursedBoxItem);
+    }
 }
 
 const app: main = new main();
 app.displayRoles();
 app.displayDraftBox();
 app.displayCadreMarkersBox();
+app.displayCursedBox();
