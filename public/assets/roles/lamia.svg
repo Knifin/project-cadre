@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="512px" height="512px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 512 512" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   
+    .fil0 {fill:black}
+   
+  </style>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+  <g id="_238416920">
+   <path class="fil0" d="M83 120c21,55 35,79 42,87 0,0 0,-1 0,-1l29 -201c-54,-14 -93,6 -104,13 3,17 17,61 33,102z"></path>
+   <path class="fil0" d="M170 7l0 94c0,16 15,30 31,30l17 0c17,0 31,-13 31,-30l0 -63c0,-18 -14,-31 -31,-31l-48 0z"></path>
+   <path class="fil0" d="M263 38l0 63c0,17 14,30 31,30l17 0c17,0 31,-13 31,-30l0 -94 -48 0c-17,0 -31,13 -31,31z"></path>
+   <path class="fil0" d="M357 5l30 201c0,0 0,1 0,1 7,-8 21,-32 42,-87 16,-41 30,-85 33,-102 -5,-3 -14,-8 -27,-12 -25,-8 -51,-8 -78,-1z"></path>
+   <path class="fil0" d="M387 306l-30 201c56,14 94,-6 105,-13 -3,-17 -17,-61 -33,-102 -21,-55 -35,-79 -42,-87 0,0 0,0 0,1z"></path>
+   <path class="fil0" d="M342 411c0,-17 -14,-31 -31,-31l-17 0c-17,0 -31,14 -31,31l0 63c0,18 14,31 31,31l48 0 0 -94z"></path>
+   <path class="fil0" d="M249 474l0 -63c0,-17 -15,-31 -31,-31l-17 0c-16,0 -31,15 -31,31l0 94 48 0c17,0 31,-13 31,-31z"></path>
+   <path class="fil0" d="M154 507l-29 -201c0,0 0,-1 0,-1 -7,8 -21,32 -42,87 -16,41 -30,84 -33,102 5,3 14,8 28,12 24,8 50,8 76,1z"></path>
+  </g>
+ </g>
+</svg>
