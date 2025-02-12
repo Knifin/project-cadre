@@ -5,6 +5,8 @@ class main {
     private readonly _roles: Konva.Layer;
     private readonly _assets: Konva.Layer;
 
+    private readonly _size: number = 100;
+
     constructor() {
         this._stage = new Konva.Stage({
             container: 'app',
@@ -33,9 +35,9 @@ class main {
             { id: 'player-12', roleName: 'Pickpocket', roleAbility: 'When a player is brought to justice, gain their ability the next Disencamp phase', roleIcon: 'pickpocket.svg' },
             { id: 'player-13', roleName: 'Saboteur', roleAbility: 'During Disencamp phase, choose a player. If they are a Servitor or Guardian, their ability doesn\'t function while you are active or fed', roleIcon: 'saboteur.svg' },
             { id: 'player-14', roleName: 'Cutthroat', roleAbility: 'During Disencamp, choose a player: if they are an Explorer or Looter they are hobbled. They are the only player that can be hobbled that phase', roleIcon: 'cutthroat.svg' },
-            { id: 'player-15', roleName: 'Lost', roleAbility: 'You believe you are an Explorer or Looter. Your ability does not function', roleIcon: 'lost.svg' },
+            //{ id: 'player-15', roleName: 'Lost', roleAbility: 'You believe you are an Explorer or Looter. Your ability does not function', roleIcon: 'lost.svg' },
             { id: 'player-16', roleName: 'Innocent', roleAbility: 'If you are brought to justice, you and the Explorers lose', roleIcon: 'innocent.svg' },
-            { id: 'player-17', roleName: 'Shadowed', roleAbility: 'You have another Explorer role. Your ability functions, but you Register as a Looter, Guardian, and Servitor', roleIcon: 'shadowed.svg' },
+            //{ id: 'player-17', roleName: 'Shadowed', roleAbility: 'You have another Explorer role. Your ability functions, but you Register as a Looter, Guardian, and Servitor', roleIcon: 'shadowed.svg' },
             { id: 'player-18', roleName: 'Covetous Villain', roleAbility: 'When you learn you\'ve been imprisoned or hobbled, publicly choosed a player. If they are an Explorer they are hobbled. You are not capable of redemption.', roleIcon: 'covetousvillain.svg' },
             { id: 'player-19', roleName: 'Hex Chanter', roleAbility: '[+1 Cursed] If a Cursed is brought to justice, you become a Guardian vessel', roleIcon: 'hexchanter.svg' },
             { id: 'player-20', roleName: 'Trapper', roleAbility: 'Once per game, during Disencamp phase choose a player. They are hobbled even if they wouldn\'t otherwise be. If you have used this ability, become a Guardian vessel', roleIcon: 'trapper.svg' },
@@ -47,66 +49,99 @@ class main {
         ];
     
         roles.forEach((role) => {
-            this.createRoleCard(role.id, `./assets/roles/${role.roleIcon}`, role.roleName, role.roleAbility);
+            this.createRoleCard(role.id, `./assets/roles/${role.roleIcon}`, role.roleName);
         });
     }
 
-    public createRoleCard(id: string, roleIconUrl: string, roleName: string, roleAbility: string): void {
+    public createRoleCard(id: string, roleIconUrl: string, roleName: string): void {
         let playerRoleCard: Konva.Group = new Konva.Group({
-            x: 25,
-            y: 25,
-            width: 300,
+            x: 0,
+            y: 0,
             id: id,
             draggable: true,
         });
 
         Konva.Image.fromURL(roleIconUrl, (roleArt: Konva.Image): void => {
             roleArt.setAttrs({
-                y: 50,
-                height: 100,
-                width: 100,
+                x: (this._size - 50)/2,
+                y: 10,
+                height: 50,
+                width: 50,
             });
-            roleArt.x(300/2 - roleArt.width()/2);
 
             let bg: Konva.Rect = new Konva.Rect({
                 x: 0,
                 y: 0,
-                width: 300,
-                height: 325,
+                width: this._size,
+                height: this._size,
                 fill: 'orange',
                 stroke: 'black',
                 strokeWidth: 2,
-                cornerRadius: 20,
             });
 
             let roleNameText: Konva.Text = new Konva.Text({
-                y: 10,
+                x: 0,
+                y: 65,
                 text: roleName,
-                fontSize: 30,
+                fontSize: 15,
                 fontFamily: 'Calibri',
                 fill: 'black',
             });
-            roleNameText.x(300/2 - roleNameText.width() / 2);
+            roleNameText.x(bg.width()/2 - roleNameText.getWidth()/2);
 
-            let roleAbilityText: Konva.Text = new Konva.Text({
-                x: 10,
-                y: 165,
-                width: 280,
-                text: roleAbility,
-                fontSize: 14,
-                fontFamily: 'Calibri',
-                fill: 'black',
+            let marker_width: number = 20;
+            let marker_height: number = 30;
+
+            let marker_1: Konva.Rect = new Konva.Rect({
+                x: 5,
+                y: (this._size-marker_height/4),
+                width: marker_width,
+                height: marker_height,
+                fill: 'grey',
+                stroke: 'black',
+                strokeWidth: 2,
+                click: false,
             });
 
-            let roleCadre: Konva.Text = new Konva.Text({
-                y: 250,
-                text: 'Cadre Marker',
-                fontSize: 14,
-                fontFamily: 'Calibri',
-                fill: 'black',
+            let marker_2: Konva.Rect = new Konva.Rect({
+                x: this._size/2 - marker_width/2,
+                y: (this._size-marker_height/4),
+                width: marker_width,
+                height: marker_height,
+                fill: 'grey',
+                stroke: 'black',
+                strokeWidth: 2,
+                click: false,
             });
-            roleCadre.x(300/2 - roleCadre.width() / 2);
-            playerRoleCard.add(bg, roleArt, roleNameText, roleAbilityText, roleCadre);
+
+            let marker_3: Konva.Rect = new Konva.Rect({
+                x: this._size - (marker_width+5),
+                y: (this._size-marker_height/4),
+                width: marker_width,
+                height: marker_height,
+                fill: 'grey',
+                stroke: 'black',
+                strokeWidth: 2,
+                click: false,
+            });
+
+            marker_1.on('dblclick', () => {
+                let fill: string = marker_1.fill() == 'grey' ? 'red' : 'grey';
+                marker_1.fill(fill);
+            });
+
+            marker_2.on('dblclick', () => {
+                let fill: string = marker_2.fill() == 'grey' ? 'yellow' : 'grey';
+                marker_2.fill(fill);
+            });
+
+            marker_3.on('dblclick', () => {
+                let fill: string = marker_3.fill() == 'grey' ? 'green' : 'grey';
+                marker_3.fill(fill);
+            });
+
+
+            playerRoleCard.add(bg, roleArt, roleNameText, marker_1, marker_2, marker_3);
         });
 
         this._roles.add(playerRoleCard);
@@ -220,7 +255,7 @@ class main {
 
     public displayCursedBox(): void {
         let cursedBox: Konva.Group = new Konva.Group({
-            x: 675,
+            x: 375,
             y: window.innerHeight - 200,
             width: 300,
         });
@@ -248,8 +283,8 @@ class main {
         this._assets.add(cursedBox);
 
         for (let i = 0; i < 25; i++) {
-            this.addCursedItem('./assets/roles/lost.svg', 750);
-            this.addCursedItem('./assets/roles/shadowed.svg', 850);
+            this.addCursedItem('./assets/roles/lost.svg', 450);
+            this.addCursedItem('./assets/roles/shadowed.svg', 550);
         }
     }
 
@@ -277,5 +312,4 @@ class main {
 const app: main = new main();
 app.displayRoles();
 app.displayDraftBox();
-app.displayCadreMarkersBox();
 app.displayCursedBox();
