@@ -320,7 +320,7 @@ class main {
             dragBoundFunc: function (pos) {
                 return {
                     x: this.x(), // Lock x position
-                    y: pos.y     // Allow only vertical movement
+                    y: Math.max(window.innerHeight-sheetGroup.height()-10, Math.min(pos.y,0))     // Allow only vertical movement
                 };
             }
         });
@@ -393,6 +393,7 @@ class main {
             sheetGroup.add(roleName);
         }
 
+        sheetGroup.height(height);
         sheet.height(height);
 
         this._components.add(sheetGroup);
