@@ -1,3 +1,4 @@
+import './style.css';
 import Konva from "konva";
 
 class main {
@@ -57,8 +58,8 @@ class main {
 
     public createRoleCard(id: string, roleIconUrl: string, roleName: string): void {
         let playerRoleCard: Konva.Group = new Konva.Group({
-            x: 0,
-            y: 0,
+            x: 10,
+            y: 10,
             id: id,
             draggable: true,
         });
@@ -79,6 +80,7 @@ class main {
                 fill: 'orange',
                 stroke: 'black',
                 strokeWidth: 2,
+                cornerRadius: 10,
             });
 
             let roleNameText: Konva.Text = new Konva.Text({
@@ -95,7 +97,7 @@ class main {
             let marker_height: number = 30;
 
             let marker_1: Konva.Rect = new Konva.Rect({
-                x: 5,
+                x: 8,
                 y: (this._size-marker_height/4),
                 width: marker_width,
                 height: marker_height,
@@ -117,7 +119,7 @@ class main {
             });
 
             let marker_3: Konva.Rect = new Konva.Rect({
-                x: this._size - (marker_width+5),
+                x: this._size - (marker_width+8),
                 y: (this._size-marker_height/4),
                 width: marker_width,
                 height: marker_height,
@@ -320,7 +322,7 @@ class main {
             dragBoundFunc: function (pos) {
                 return {
                     x: this.x(), // Lock x position
-                    y: Math.max(window.innerHeight-sheetGroup.height()-10, Math.min(pos.y,0))     // Allow only vertical movement
+                    y: pos.y     // Allow only vertical movement
                 };
             }
         });
@@ -342,6 +344,7 @@ class main {
             width: width,
             height: window.innerHeight,
             fill: 'grey',
+            cornerRadius: 20,
         });
 
         sheetGroup.add(sheet);
