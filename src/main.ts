@@ -75,7 +75,7 @@ class main {
     
         roles.forEach((role) => {
             this.createRoleToken(role.id, `./assets/roles/icons/${role.roleIcon}.png`, role.roleName);
-            this.createRoleCards(role.id, `./assets/roles/cards/${role.roleIcon}.png`, role.roleName);
+            this.createRoleCards(role.id, `./assets/roles/cards/${role.roleIcon}.png`);
         });
     }
 
@@ -173,7 +173,7 @@ class main {
         this._roles.add(playerRoleCard);
     }
 
-    public createRoleCards(id: string, roleIconUrl: string, roleName: string): void {
+    public createRoleCards(id: string, roleIconUrl: string): void {
         let playerRoleCard: Konva.Group = new Konva.Group({
             x: 10,
             y: 200,
