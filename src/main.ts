@@ -77,6 +77,42 @@ class main {
             this.createRoleToken(role.id, `./assets/roles/icons/${role.roleIcon}.png`, role.roleName);
             this.createRoleCards(role.id, `./assets/roles/cards/${role.roleIcon}.png`);
         });
+
+        const size: number = 20;
+        this._assets.add(this.createMarker('blue',size,{x:size+10,y:550}));
+        this._assets.add(this.createMarker('blue',size,{x:size+10,y:550}));
+        this._assets.add(this.createMarker('blue',size,{x:size+10,y:550}));
+
+        this._assets.add(this.createMarker('red',size,{x:size+10,y:600}));
+
+        this._assets.add(this.createMarker('green',size,{x:size+10,y:650}));
+
+        this._assets.add(this.createMarker('black',size,{x:size+10,y:700}));
+        this._assets.add(this.createMarker('black',size,{x:size+10,y:700}));
+        this._assets.add(this.createMarker('black',size,{x:size+10,y:700}));
+        this._assets.add(this.createMarker('black',size,{x:size+10,y:700}));
+        this._assets.add(this.createMarker('black',size,{x:size+10,y:700}));
+    }
+
+    public createMarker(color: string, size: number, position: { x: number, y: number }) {
+        const group = new Konva.Group({
+           x: position.x,
+           y: position.y,
+           draggable: true,
+        });
+
+        const circle = new Konva.Circle({
+            x: 0,
+            y: 0,
+            radius: size,
+            fill: color,
+            stroke: 'black',
+            strokeWidth: 4
+        });
+
+        group.add(circle);
+
+        return group;
     }
 
     public createRoleToken(id: string, roleIconUrl: string, roleName: string): void {
