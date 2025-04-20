@@ -6,10 +6,13 @@ class main {
     private readonly _roles: Konva.Layer;
     private readonly _assets: Konva.Layer;
     private readonly _components: Konva.Layer;
+    private _playerCount: number;
 
-    private readonly _size: number = 100;
+    private readonly _size: number = 125;
 
     constructor() {
+        this._playerCount = 0;
+
         this._stage = new Konva.Stage({
             container: 'app',
             height: window.innerHeight,
@@ -72,11 +75,56 @@ class main {
             { id: 'player-24', roleName: 'Hive', roleAbility: 'Each Disencamp phase, choose a player; they are hobbled. All of your Servitors are Guardian Vessels.', roleIcon: 'hive' },
             { id: 'player-25', roleName: 'Vengeance', roleAbility: '[-1 Cursed] Each Disencamp phase, choose a player; they are hobbled. If you hobble a Looter or Servitor, their closest active non-Servitor neighbor becomes an out of play Cursed role', roleIcon: 'vengeance' },
         ];
-    
+
         roles.forEach((role) => {
-            this.createRoleToken(role.id, `./assets/roles/icons/${role.roleIcon}.png`, role.roleName);
+            // this.createRoleToken(role.id, `./assets/roles/icons/${role.roleIcon}.png`, role.roleName);
             this.createRoleCards(role.id, `./assets/roles/cards/${role.roleIcon}.png`);
         });
+
+        // Group the button and text
+        const buttonGroup = new Konva.Group({
+            x: 10,
+            y: 10,
+        });
+
+        const button = new Konva.Rect({
+            x: 0,
+            y: 0,
+            width: 150,
+            height: 50,
+            fill: '#3498db',
+            cornerRadius: 10,
+            shadowColor: 'black',
+            shadowBlur: 5,
+            shadowOffset: { x: 3, y: 3 },
+            shadowOpacity: 0.2,
+        });
+
+        // Create the button text
+        const buttonText = new Konva.Text({
+            x: 0,
+            y: 0,
+            width: 150,
+            height: 50,
+            text: 'Add Player',
+            fontSize: 18,
+            fontFamily: 'Calibri',
+            fill: 'white',
+            align: 'center',
+            verticalAlign: 'middle',
+        });
+
+        buttonGroup.add(button, buttonText);
+
+        buttonGroup.on('dblclick', () => {
+            const playerName: string | null = prompt('Enter player name:');
+            if (playerName) {
+                this._playerCount += 1;
+                this.createPlayerToken('player-' + this._playerCount, playerName);
+            }
+        });
+
+        this._assets.add(buttonGroup);
 
         const size: number = 20;
         this._assets.add(this.createMarker('blue',size,{x:size+10,y:550}));
@@ -205,6 +253,91 @@ class main {
 
             playerRoleCard.add(bg, roleArt, roleNameText, marker_1, marker_2, marker_3);
         });
+
+        this._roles.add(playerRoleCard);
+    }
+
+    public createPlayerToken(id: string, playerName: string): void {
+        let playerRoleCard: Konva.Group = new Konva.Group({
+            x: 10,
+            y: 100,
+            id: id,
+            draggable: true,
+        });
+
+        let bg: Konva.Rect = new Konva.Rect({
+            x: 0,
+            y: 0,
+            width: this._size,
+            height: 50,
+            fill: 'orange',
+            stroke: 'black',
+            strokeWidth: 2,
+            cornerRadius: 10,
+        });
+
+        let roleNameText: Konva.Text = new Konva.Text({
+            x: 0,
+            y: 15,
+            text: playerName,
+            fontSize: 15,
+            fontFamily: 'Calibri',
+            fill: 'black',
+        });
+        roleNameText.x(bg.width()/2 - roleNameText.getWidth()/2);
+
+        let marker_width: number = 20;
+        let marker_height: number = 25;
+
+        let marker_1: Konva.Rect = new Konva.Rect({
+            x: 8,
+            y: (40-marker_height/4),
+            width: marker_width,
+            height: marker_height,
+            fill: 'grey',
+            stroke: 'black',
+            strokeWidth: 2,
+            click: false,
+        });
+
+        let marker_2: Konva.Rect = new Konva.Rect({
+            x: this._size/2 - marker_width/2,
+            y: (40-marker_height/4),
+            width: marker_width,
+            height: marker_height,
+            fill: 'grey',
+            stroke: 'black',
+            strokeWidth: 2,
+            click: false,
+        });
+
+        let marker_3: Konva.Rect = new Konva.Rect({
+            x: this._size - (marker_width+8),
+            y: (40-marker_height/4),
+            width: marker_width,
+            height: marker_height,
+            fill: 'grey',
+            stroke: 'black',
+            strokeWidth: 2,
+            click: false,
+        });
+
+        marker_1.on('dblclick', () => {
+            let fill: string = marker_1.fill() == 'grey' ? 'red' : 'grey';
+            marker_1.fill(fill);
+        });
+
+        marker_2.on('dblclick', () => {
+            let fill: string = marker_2.fill() == 'grey' ? 'yellow' : 'grey';
+            marker_2.fill(fill);
+        });
+
+        marker_3.on('dblclick', () => {
+            let fill: string = marker_3.fill() == 'grey' ? 'green' : 'grey';
+            marker_3.fill(fill);
+        });
+
+        playerRoleCard.add(bg, roleNameText, marker_1, marker_2, marker_3);
 
         this._roles.add(playerRoleCard);
     }
